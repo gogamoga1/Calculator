@@ -32,6 +32,11 @@ const isEqual = () => {
     displayValue = 0;
 }
 
+const delLastChar = () => {
+    (!display.textContent || display.textContent.length == 1) ? display.textContent = "0": display.textContent = display.textContent.slice(0, -1);
+    displayValue = parseFloat(display.textContent);
+}
+
 const checkOperator = () => {
     if (operatorToggle) {
         display.textContent = '0'
@@ -107,7 +112,7 @@ decimal.addEventListener('click', (e) => {
 document.addEventListener('keydown', (e) => {
     switch (e.keyCode) {
         case 8:
-            (!display.textContent || display.textContent.length == 1) ? display.textContent = "0": display.textContent = display.textContent.slice(0, -1);
+            delLastChar();
             break;
 
         case 106:
