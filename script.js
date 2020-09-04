@@ -29,12 +29,13 @@ const isEqual = () => {
     if (!num1) return
     num2 = displayValue;
     calculate();
-    displayValue = 0;
+    displayValue = num1;
 }
 
 const delLastChar = () => {
     (!display.textContent || display.textContent.length == 1) ? display.textContent = "0": display.textContent = display.textContent.slice(0, -1);
     displayValue = parseFloat(display.textContent);
+    if (!operatorToggle) num1 = 0;
 }
 
 const checkOperator = () => {
@@ -150,7 +151,7 @@ document.addEventListener('keydown', (e) => {
     if (display.textContent.length > 16) {
         return;
     }
-    if (display.textContent === "0") {
+    if (display.textContent === "0" || displayValue == 0) {
         display.textContent = e.key
     } else {
         display.textContent += e.key
