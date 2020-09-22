@@ -11,11 +11,6 @@ let num2 = 0;
 let currOperator = null;
 let operatorToggle = 0;
 
-
-const add = (a, b) => a + b;
-const substract = (a, b) => a - b;
-const multiply = (a, b) => a * b;
-const divide = (a, b) => b == 0 ? "undefined" : Math.floor(a / b * 100) / 100;
 const calculate = () => {
     if (!currOperator) return;
     display.textContent = operate(currOperator, num1, num2);
@@ -43,6 +38,20 @@ const checkOperator = () => {
         display.textContent = '0'
         operatorToggle = 0;
     }
+    else {
+        if (num1 && displayValue && !currOperator) {
+            clearAreas();
+        }
+    }
+}
+
+const clearAreas = () => {
+    displayValue = 0;
+    num1 = 0;
+    num2 = 0;
+    display.textContent = '0'
+    currOperator = null;
+    operatorToggle = 0;
 }
 
 const applyOperator = () => {
@@ -57,13 +66,13 @@ const applyOperator = () => {
 const operate = (operator, a, b) => {
     switch (operator) {
         case 'add':
-            return add(a, b);
+            return a + b;
         case 'substract':
-            return substract(a, b);
+            return a - b;
         case 'multiply':
-            return multiply(a, b);
+            return a * b;
         case 'divide':
-            return divide(a, b);
+            return b == 0 ? "undefined" : Math.floor(a / b * 100) / 100;
     }
 };
 
@@ -91,15 +100,9 @@ operators.forEach((button) => {
 
 equal.addEventListener('click', isEqual);
 
-clear.addEventListener('click', (e) => {
-    displayValue = 0;
-    num1 = 0;
-    num2 = 0;
-    display.textContent = '0'
-    currOperator = null;
-    operatorToggle = 0;
+clear.addEventListener('click', clearAreas)
 
-})
+
 
 decimal.addEventListener('click', (e) => {
     if (display.textContent.includes(".")) {
